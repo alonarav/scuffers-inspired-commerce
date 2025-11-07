@@ -99,7 +99,7 @@ export default function CartDrawer() {
                           <p className="text-xs text-muted-foreground mt-1">{item.variantTitle}</p>
                         )}
                         <p className="text-sm mt-1">
-                          ${parseFloat(item.price).toFixed(2)} {item.currencyCode}
+                          {parseFloat(item.price).toFixed(2)} {item.currencyCode}
                         </p>
 
                         <div className="flex items-center gap-2 mt-2">

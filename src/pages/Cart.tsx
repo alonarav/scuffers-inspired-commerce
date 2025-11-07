@@ -95,7 +95,7 @@ export default function Cart() {
                       <p className="text-sm text-muted-foreground mb-2">{item.variantTitle}</p>
                     )}
                     <p className="text-lg mb-4">
-                      ${parseFloat(item.price).toFixed(2)} {item.currencyCode}
+                      {parseFloat(item.price).toFixed(2)} {item.currencyCode}
                     </p>
 
                     <div className="flex items-center gap-4">
@@ -126,7 +126,7 @@ export default function Cart() {
                       </button>
 
                       <p className="ml-auto text-lg font-medium">
-                        ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                        {(parseFloat(item.price) * item.quantity).toFixed(2)}
                       </p>
                     </div>
                   </div>
