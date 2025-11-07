@@ -41,11 +41,10 @@ export default function Home() {
           className="relative z-10 text-center px-4"
         >
         <h1 
-          className={`text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 transition-all duration-700 ${
+          className={`text-4xl md:text-6xl lg:text-7xl font-optimus tracking-wider mb-6 transition-all duration-700 ${
             brightness === 'bright' ? 'text-primary' : 'text-white'
           }`}
           style={{
-            fontFamily: "'Optimus Princeps', serif",
             textShadow: brightness === 'bright' 
               ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
               : '2px 2px 8px rgba(0, 0, 0, 0.8)',
