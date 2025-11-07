@@ -41,7 +41,7 @@ export default function Home() {
           className="relative z-10 text-center px-4"
         >
         <h1 
-          className={`text-4xl md:text-6xl lg:text-7xl font-optimus tracking-wider mb-6 transition-all duration-700 ${
+          className={`text-4xl md:text-6xl lg:text-7xl font-optimus tracking-wider  transition-all duration-700 ${
             brightness === 'bright' ? 'text-primary' : 'text-white'
           }`}
           style={{
@@ -52,11 +52,8 @@ export default function Home() {
         >
           CLARO
         </h1>
-
-
-
           <p 
-            className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto transition-all duration-700 ${
+            className={`text-lg md:text-xl mb-5 max-w-2xl mx-auto transition-all duration-700 ${
               brightness === 'bright' ? 'text-primary/80' : 'text-white/90'
             }`}
             style={{
