@@ -21,7 +21,7 @@ const App = () => (
       <Sonner richColors position="top-center" />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout><Outlet /></Layout>}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="shop" element={<Shop />} />
             <Route path="product/:handle" element={<Product />} />
