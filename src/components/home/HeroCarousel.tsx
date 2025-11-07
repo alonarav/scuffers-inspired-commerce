@@ -1,50 +1,59 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getCollectionByHandle, ShopifyProduct } from '@/lib/shopify';
+import { getPromoImages } from '@/lib/shopify';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface HeroCarouselProps {
-  collectionHandle?: string;
+interface PromoImage {
+  id: string;
+  image: {
+    url: string;
+    altText: string | null;
+  } | null;
+  title: string;
+  placement: string;
 }
 
-export default function HeroCarousel({ collectionHandle = 'hero-banners' }: HeroCarouselProps) {
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+interface HeroCarouselProps {
+  placement?: string;
+}
+
+export default function HeroCarousel({ placement = 'hero-banner' }: HeroCarouselProps) {
+  const [images, setImages] = useState<PromoImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchHeroImages = async () => {
       try {
-        const collection = await getCollectionByHandle(collectionHandle);
-        const heroProducts = collection.products.edges.map(edge => edge.node);
-        console.log('Hero products fetched:', heroProducts.length, heroProducts);
-        setProducts(heroProducts);
+        const promoImages = await getPromoImages(placement);
+        console.log('Promo images fetched:', promoImages.length, promoImages);
+        setImages(promoImages);
       } catch (error) {
-        console.error('Error fetching hero images:', error);
+        console.error('Error fetching promo images:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchHeroImages();
-  }, [collectionHandle]);
+  }, [placement]);
 
   useEffect(() => {
-    if (products.length <= 1) return;
+    if (images.length <= 1) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % products.length);
+      setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [products.length]);
+  }, [images.length]);
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % products.length);
+    setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   if (isLoading) {
@@ -53,17 +62,16 @@ export default function HeroCarousel({ collectionHandle = 'hero-banners' }: Hero
     );
   }
 
-  if (products.length === 0) {
-    console.log('No products found in hero-banners collection');
+  if (images.length === 0) {
+    console.log('No promo images found with placement:', placement);
     return (
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-        <p className="text-muted-foreground">No hero images found in collection</p>
+        <p className="text-muted-foreground">No hero images found</p>
       </div>
     );
   }
 
-  const currentProduct = products[currentIndex];
-  const currentImage = currentProduct?.images.edges[0]?.node;
+  const currentImage = images[currentIndex]?.image;
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -79,7 +87,7 @@ export default function HeroCarousel({ collectionHandle = 'hero-banners' }: Hero
           {currentImage && (
             <img
               src={currentImage.url}
-              alt={currentImage.altText || currentProduct.title}
+              alt={currentImage.altText || images[currentIndex].title || 'Hero image'}
               className="w-full h-full object-cover"
             />
           )}
@@ -88,7 +96,7 @@ export default function HeroCarousel({ collectionHandle = 'hero-banners' }: Hero
       </AnimatePresence>
 
       {/* Navigation Arrows */}
-      {products.length > 1 && (
+      {images.length > 1 && (
         <>
           <button
             onClick={goToPrevious}
@@ -108,9 +116,9 @@ export default function HeroCarousel({ collectionHandle = 'hero-banners' }: Hero
       )}
 
       {/* Dots Indicator */}
-      {products.length > 1 && (
+      {images.length > 1 && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-          {products.map((_, index) => (
+          {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}

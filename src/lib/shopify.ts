@@ -39,6 +39,24 @@ export interface ShopifyCollection {
   };
 }
 
+export interface PromoImage {
+  id: string;
+  image: {
+    reference: {
+      image: {
+        url: string;
+        altText: string | null;
+      };
+    };
+  };
+  placement: {
+    value: string;
+  };
+  title?: {
+    value: string;
+  };
+}
+
 async function shopifyFetch<T>(query: string, variables: Record<string, any> = {}): Promise<T> {
   const response = await fetch(SHOPIFY_GRAPHQL_URL, {
     method: 'POST',
@@ -184,6 +202,71 @@ export async function getCollectionByHandle(handle: string) {
 
   const data = await shopifyFetch<{ collection: ShopifyCollection }>(query, { handle });
   return data.collection;
+}
+
+export async function getPromoImages(placement: string = 'hero-banner') {
+  const query = `
+    query GetPromoImages($type: String!, $first: Int!) {
+      metaobjects(type: $type, first: $first) {
+        edges {
+          node {
+            id
+            fields {
+              key
+              value
+              reference {
+                ... on MediaImage {
+                  image {
+                    url
+                    altText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await shopifyFetch<{
+    metaobjects: {
+      edges: Array<{
+        node: {
+          id: string;
+          fields: Array<{
+            key: string;
+            value: string;
+            reference?: {
+              image?: {
+                url: string;
+                altText: string | null;
+              };
+            };
+          }>;
+        };
+      }>;
+    };
+  }>(query, { type: 'promo_image', first: 20 });
+
+  // Filter and transform metaobjects to get hero-banner images
+  const promoImages = data.metaobjects.edges
+    .map(edge => {
+      const fields = edge.node.fields;
+      const placementField = fields.find(f => f.key === 'placement');
+      const imageField = fields.find(f => f.key === 'image');
+      const titleField = fields.find(f => f.key === 'title');
+
+      return {
+        id: edge.node.id,
+        placement: placementField?.value || '',
+        image: imageField?.reference?.image || null,
+        title: titleField?.value || '',
+      };
+    })
+    .filter(item => item.placement === placement && item.image !== null);
+
+  return promoImages;
 }
 
 export async function createCheckout(lineItems: Array<{ variantId: string; quantity: number }>) {

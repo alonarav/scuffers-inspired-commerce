@@ -30,7 +30,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <HeroCarousel collectionHandle="hero-banners" />
+        <HeroCarousel placement="hero-banner" />
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
