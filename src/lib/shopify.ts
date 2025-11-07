@@ -52,6 +52,9 @@ export interface PromoImage {
   placement: {
     value: string;
   };
+  bright: {
+    value: string;
+  };
   title?: {
     value: string;
   };
@@ -256,12 +259,14 @@ export async function getPromoImages(placement: string = 'hero-banner') {
       const placementField = fields.find(f => f.key === 'placement');
       const imageField = fields.find(f => f.key === 'image');
       const titleField = fields.find(f => f.key === 'title');
+      const brightField = fields.find(f => f.key === 'bright');
 
       return {
         id: edge.node.id,
         placement: placementField?.value || '',
         image: imageField?.reference?.image || null,
         title: titleField?.value || '',
+        bright: brightField?.value || 'dark',
       };
     })
     .filter(item => item.placement === placement && item.image !== null);

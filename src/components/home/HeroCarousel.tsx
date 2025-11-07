@@ -11,11 +11,12 @@ interface PromoImage {
   } | null;
   title: string;
   placement: string;
+  bright: string;
 }
 
 interface HeroCarouselProps {
   placement?: string;
-  onBrightnessChange?: (isDark: boolean) => void;
+  onBrightnessChange?: (bright: string) => void;
 }
 
 export default function HeroCarousel({ placement = 'hero-banner', onBrightnessChange }: HeroCarouselProps) {
@@ -49,39 +50,12 @@ export default function HeroCarousel({ placement = 'hero-banner', onBrightnessCh
     return () => clearInterval(interval);
   }, [images.length]);
 
-  // Detect image brightness
+  // Update brightness when image changes
   useEffect(() => {
-    const currentImage = images[currentIndex]?.image;
-    if (!currentImage || !onBrightnessChange) return;
-
-    const img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.src = currentImage.url;
-
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-      let brightnessSum = 0;
-
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i];
-        const g = data[i + 1];
-        const b = data[i + 2];
-        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-        brightnessSum += brightness;
-      }
-
-      const avgBrightness = brightnessSum / (data.length / 4);
-      onBrightnessChange(avgBrightness < 128);
-    };
+    const currentImage = images[currentIndex];
+    if (currentImage && onBrightnessChange) {
+      onBrightnessChange(currentImage.bright);
+    }
   }, [currentIndex, images, onBrightnessChange]);
 
   const goToNext = () => {

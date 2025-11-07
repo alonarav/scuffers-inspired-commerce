@@ -10,7 +10,7 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<ShopifyProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDarkBackground, setIsDarkBackground] = useState(true);
+  const [brightness, setBrightness] = useState<string>('dark');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,7 +31,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <HeroCarousel placement="hero-banner" onBrightnessChange={setIsDarkBackground} />
+        <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -39,14 +39,28 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4"
         >
-          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 transition-colors duration-500 ${
-            isDarkBackground ? 'text-white' : 'text-primary'
-          }`}>
+          <h1 
+            className={`text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 transition-all duration-700 ${
+              brightness === 'bright' ? 'text-primary' : 'text-white'
+            }`}
+            style={{
+              textShadow: brightness === 'bright' 
+                ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
+                : '2px 2px 8px rgba(0, 0, 0, 0.8)'
+            }}
+          >
             Timeless Elegance
           </h1>
-          <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto transition-colors duration-500 ${
-            isDarkBackground ? 'text-white/90' : 'text-primary/80'
-          }`}>
+          <p 
+            className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto transition-all duration-700 ${
+              brightness === 'bright' ? 'text-primary/80' : 'text-white/90'
+            }`}
+            style={{
+              textShadow: brightness === 'bright' 
+                ? '1px 1px 6px rgba(0, 0, 0, 0.2)' 
+                : '1px 1px 6px rgba(0, 0, 0, 0.7)'
+            }}
+          >
             Everyday Comfort
           </p>
           <Button asChild size="lg" className="group">
