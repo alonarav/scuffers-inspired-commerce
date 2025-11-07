@@ -126,7 +126,7 @@ export default function Cart() {
                       </button>
 
                       <p className="ml-auto text-lg font-medium">
-                        ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                        {(parseFloat(item.price) * item.quantity).toFixed(2)}
                       </p>
                     </div>
                   </div>

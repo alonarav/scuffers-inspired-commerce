@@ -36,10 +36,10 @@ export default function Home() {
           className="text-center px-4"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6">
-            Timeless Essentials
+            Timeless Elegance
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Discover our curated collection of modern classics
+            Everyday Comfort
           </p>
           <Button asChild size="lg" className="group">
             <Link to="/shop">

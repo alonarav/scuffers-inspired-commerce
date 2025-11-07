@@ -150,7 +150,7 @@ export default function Product() {
                 {product.title}
               </h1>
               <p className="text-2xl">
-                ${price.toFixed(2)} {selectedVariant?.price.currencyCode}
+                {price.toFixed(2)} {selectedVariant?.price.currencyCode}
               </p>
             </div>
 
@@ -204,7 +204,6 @@ export default function Product() {
 
               {selectedVariant?.availableForSale && (
                 <p className="text-xs text-muted-foreground text-center">
-                  Free shipping on orders over $100
                 </p>
               )}
             </div>
