@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getProducts, ShopifyProduct } from '@/lib/shopify';
 import ProductGrid from '@/components/products/ProductGrid';
+import HeroCarousel from '@/components/home/HeroCarousel';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
@@ -27,18 +28,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center bg-secondary/30">
+      {/* Hero Section with Carousel Background */}
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+        <HeroCarousel collectionHandle="hero-banners" />
+        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center px-4"
+          className="relative z-10 text-center px-4"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 text-white drop-shadow-lg">
             Timeless Essentials
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow">
             Discover our curated collection of modern classics
           </p>
           <Button asChild size="lg" className="group">
