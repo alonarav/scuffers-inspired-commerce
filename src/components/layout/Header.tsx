@@ -34,10 +34,10 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[8vh] md:h-16">
+        <div className="flex items-center justify-between min-h-[10vh] md:h-16 py-3 md:py-0">
           {/* Logo */}
           <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity">
-            <img src={claroLogo} alt="claro logo" className="h-6 md:h-10" />
+            <img src={claroLogo} alt="claro logo" className="h-7 md:h-10" />
           </Link>
 
           {/* Desktop Navigation */}
