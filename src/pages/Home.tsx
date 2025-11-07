@@ -14,7 +14,7 @@ export default function Home() {
   const [brightness, setBrightness] = useState<string>('dark');
   
   const { scrollY } = useScroll();
-  const yParallax = useTransform(scrollY, [0, 500], [0, 150]);
+  const yParallax = useTransform(scrollY, [0, 500], [0, -200]);
 
 
   useEffect(() => {
