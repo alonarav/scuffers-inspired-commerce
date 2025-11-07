@@ -29,9 +29,16 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-8 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
-      }`}
+      className={`fixed top-8 left-0 right-0 z-50 transition-all duration-300`}
+      style={{
+        background: isScrolled 
+          ? 'rgba(255, 255, 255, 0.95)' 
+          : 'transparent',
+        backdropFilter: isScrolled ? 'blur(8px)' : 'none',
+        boxShadow: isScrolled 
+          ? '0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)' 
+          : 'none'
+      }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
