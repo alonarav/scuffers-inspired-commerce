@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { getProducts, ShopifyProduct } from '@/lib/shopify';
 import ProductGrid from '@/components/products/ProductGrid';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import floatingMan from '@/assets/man_floating.png';
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<ShopifyProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [brightness, setBrightness] = useState<string>('dark');
+  
+  const { scrollY } = useScroll();
+  const yParallax = useTransform(scrollY, [0, 500], [0, 150]);
 
 
   useEffect(() => {
@@ -33,6 +37,18 @@ export default function Home() {
       {/* Hero Section with Carousel Background */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden mt-8">
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
+        
+        {/* Floating Man */}
+        <motion.div
+          style={{ y: yParallax }}
+          className="absolute left-8 md:left-16 bottom-16 md:bottom-24 z-10 animate-float"
+        >
+          <img 
+            src={floatingMan} 
+            alt="Floating person" 
+            className="w-32 md:w-48 lg:w-56 object-contain pointer-events-none"
+          />
+        </motion.div>
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
