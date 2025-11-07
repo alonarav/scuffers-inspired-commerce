@@ -85,13 +85,13 @@ export default function HeroCarousel({ placement = 'hero-banner', onBrightnessCh
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '-100%' }}
+          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           className="absolute inset-0"
         >
           {currentImage && (
