@@ -43,19 +43,19 @@ export default function Home() {
         {/* Floating Man - Left */}
         <motion.div
           style={{ y: yParallax }}
-          className="absolute left-8 md:left-16 bottom-16 md:bottom-24 z-10 animate-float"
+          className="absolute left-8 md:left-16 bottom-16 md:bottom-24 z-10"
         >
           <img 
             src={floatingMan} 
             alt="Floating person" 
-            className="w-32 md:w-48 lg:w-56 object-contain pointer-events-none"
+            className="w-32 md:w-48 lg:w-56 object-contain pointer-events-none animate-float"
           />
         </motion.div>
 
         {/* Floating Man - Upper Right */}
         <motion.div
           style={{ y: yParallax2 }}
-          className="absolute right-8 md:right-16 top-16 md:top-24 z-10 animate-float"
+          className="absolute right-8 md:right-16 top-16 md:top-24 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -63,7 +63,8 @@ export default function Home() {
           <img 
             src={floatingMan2} 
             alt="Floating person" 
-            className="w-24 md:w-40 lg:w-48 object-contain pointer-events-none"
+            className="w-24 md:w-40 lg:w-48 object-contain pointer-events-none animate-float"
+            style={{ animationDelay: '1.5s' }}
           />
         </motion.div>
         
