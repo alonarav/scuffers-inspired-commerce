@@ -37,7 +37,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo */}
           <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity">
-            <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
+            <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" /> 
           </Link>
 
           {/* Desktop Navigation */}

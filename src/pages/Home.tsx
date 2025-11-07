@@ -48,7 +48,10 @@ export default function Home() {
             textShadow: brightness === 'bright' 
               ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
               : '2px 2px 8px rgba(0, 0, 0, 0.8)',
-          }}
+              marginBottom: '-0.5rem',
+          }
+          
+        }
         >
           CLARO
         </h1>
