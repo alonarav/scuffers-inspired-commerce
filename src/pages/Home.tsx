@@ -10,6 +10,7 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<ShopifyProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDarkBackground, setIsDarkBackground] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,7 +31,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <HeroCarousel placement="hero-banner" />
+        <HeroCarousel placement="hero-banner" onBrightnessChange={setIsDarkBackground} />
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -38,10 +39,14 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6">
+          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 transition-colors duration-500 ${
+            isDarkBackground ? 'text-white' : 'text-primary'
+          }`}>
             Timeless Elegance
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto transition-colors duration-500 ${
+            isDarkBackground ? 'text-white/90' : 'text-primary/80'
+          }`}>
             Everyday Comfort
           </p>
           <Button asChild size="lg" className="group">
