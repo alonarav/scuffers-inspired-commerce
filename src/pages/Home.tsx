@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden mt-8">
+      <section className="relative h-[60vh] md:h-[90vh] flex items-center justify-center overflow-hidden mt-8">
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
         
         <motion.div
