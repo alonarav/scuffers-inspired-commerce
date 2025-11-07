@@ -56,7 +56,7 @@ export default function Home() {
 
 
           <p 
-            className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto transition-all duration-700 ${
+            className={`text-2xl md:text-3xl font-script mb-8 max-w-2xl mx-auto transition-all duration-700 ${
               brightness === 'bright' ? 'text-primary/80' : 'text-white/90'
             }`}
             style={{
