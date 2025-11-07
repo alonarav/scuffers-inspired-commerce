@@ -17,6 +17,7 @@ export default function HeroCarousel({ collectionHandle = 'hero-banners' }: Hero
       try {
         const collection = await getCollectionByHandle(collectionHandle);
         const heroProducts = collection.products.edges.map(edge => edge.node);
+        console.log('Hero products fetched:', heroProducts.length, heroProducts);
         setProducts(heroProducts);
       } catch (error) {
         console.error('Error fetching hero images:', error);
@@ -46,9 +47,18 @@ export default function HeroCarousel({ collectionHandle = 'hero-banners' }: Hero
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   };
 
-  if (isLoading || products.length === 0) {
+  if (isLoading) {
     return (
       <div className="absolute inset-0 bg-secondary/30 animate-pulse" />
+    );
+  }
+
+  if (products.length === 0) {
+    console.log('No products found in hero-banners collection');
+    return (
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+        <p className="text-muted-foreground">No hero images found in collection</p>
+      </div>
     );
   }
 
