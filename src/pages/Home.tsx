@@ -45,7 +45,7 @@ export default function Home() {
             brightness === 'bright' ? 'text-primary' : 'text-white'
           }`}
           style={{
-            fontFamily: "'Optimus Princeps', regular",
+            fontFamily: "'Optimus Princeps', serif",
             textShadow: brightness === 'bright' 
               ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
               : '2px 2px 8px rgba(0, 0, 0, 0.8)',
