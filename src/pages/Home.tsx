@@ -12,6 +12,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [brightness, setBrightness] = useState<string>('dark');
 
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -39,18 +40,22 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4"
         >
-          <h1 
-            className={`text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 transition-all duration-700 ${
-              brightness === 'bright' ? 'text-primary' : 'text-white'
-            }`}
-            style={{
-              textShadow: brightness === 'bright' 
-                ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
-                : '2px 2px 8px rgba(0, 0, 0, 0.8)'
-            }}
-          >
-            Timeless Elegance
-          </h1>
+        <h1 
+          className={`text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6 transition-all duration-700 ${
+            brightness === 'bright' ? 'text-primary' : 'text-white'
+          }`}
+          style={{
+            fontFamily: "'Optimus Princeps', regular",
+            textShadow: brightness === 'bright' 
+              ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
+              : '2px 2px 8px rgba(0, 0, 0, 0.8)',
+          }}
+        >
+          CLARO
+        </h1>
+
+
+
           <p 
             className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto transition-all duration-700 ${
               brightness === 'bright' ? 'text-primary/80' : 'text-white/90'
@@ -61,7 +66,7 @@ export default function Home() {
                 : '1px 1px 6px rgba(0, 0, 0, 0.7)'
             }}
           >
-            Everyday Comfort
+            Refined by nature
           </p>
           <Button asChild size="lg" className="group">
             <Link to="/shop">
