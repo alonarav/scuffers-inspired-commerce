@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.title}
           </h3>
           <p className="text-sm text-muted-foreground">
-            ${price.toFixed(2)} {variant?.price.currencyCode}
+            {price.toFixed(2)} {variant?.price.currencyCode}
           </p>
         </div>
       </Link>

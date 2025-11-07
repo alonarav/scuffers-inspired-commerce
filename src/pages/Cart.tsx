@@ -95,7 +95,7 @@ export default function Cart() {
                       <p className="text-sm text-muted-foreground mb-2">{item.variantTitle}</p>
                     )}
                     <p className="text-lg mb-4">
-                      ${parseFloat(item.price).toFixed(2)} {item.currencyCode}
+                      {parseFloat(item.price).toFixed(2)} {item.currencyCode}
                     </p>
 
                     <div className="flex items-center gap-4">
