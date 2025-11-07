@@ -29,15 +29,15 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-[40px] md:top-8 left-0 right-0 z-50 transition-all duration-300 mb-2 ${
+      className={`fixed top-8 left-0 right-0 z-50 transition-all duration-300 mb-2 ${
         isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-background/70 backdrop-blur-sm shadow-md'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-16">
+        <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo */}
           <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity">
-            <img src={claroLogo} alt="claro logo" className="h-7 md:h-10" />
+            <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
           </Link>
 
           {/* Desktop Navigation */}

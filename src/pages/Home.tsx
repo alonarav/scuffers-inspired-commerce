@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
-      <section className="relative h-[60vh] md:h-[90vh] flex items-center justify-center overflow-hidden mt-8">
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden mt-8">
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
         
         <motion.div
@@ -48,10 +48,7 @@ export default function Home() {
             textShadow: brightness === 'bright' 
               ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
               : '2px 2px 8px rgba(0, 0, 0, 0.8)',
-              marginBottom: '-0.5rem',
-          }
-          
-        }
+          }}
         >
           CLARO
         </h1>
