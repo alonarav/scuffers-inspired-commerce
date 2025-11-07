@@ -84,7 +84,12 @@ export default function HeroCarousel({ placement = 'hero-banner', onBrightnessCh
   const currentImage = images[currentIndex]?.image;
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <motion.div 
+      className="absolute inset-0 overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
@@ -142,6 +147,6 @@ export default function HeroCarousel({ placement = 'hero-banner', onBrightnessCh
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
