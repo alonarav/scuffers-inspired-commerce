@@ -1,0 +1,108 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ShoppingBag, Menu, X } from 'lucide-react';
+import { useCartStore } from '@/store/cartStore';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openCart, getItemCount } = useCartStore();
+  const itemCount = getItemCount();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/shop', label: 'Shop' },
+    { to: '/about', label: 'About' },
+    { to: '/contact', label: 'Contact' },
+  ];
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-background/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity">
+            BOUTIQUE
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-sm uppercase tracking-wider hover:text-muted-foreground transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Cart & Mobile Menu */}
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={openCart}
+              className="relative p-2 hover:bg-accent rounded-full transition-colors"
+              aria-label="Shopping cart"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 hover:bg-accent rounded-full transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-border bg-background"
+          >
+            <nav className="container mx-auto px-4 py-4 space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-sm uppercase tracking-wider hover:text-muted-foreground transition-colors py-2"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
