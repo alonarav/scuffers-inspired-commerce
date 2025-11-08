@@ -308,7 +308,19 @@ export async function getDiscountText() {
 
     if (data.metaobjects.edges.length > 0) {
       const descriptionField = data.metaobjects.edges[0].node.fields.find(f => f.key === 'description');
-      return descriptionField?.value || null;
+      if (descriptionField?.value) {
+        try {
+          // Parse the rich text JSON structure
+          const richText = JSON.parse(descriptionField.value);
+          // Extract text from nested structure
+          if (richText.children?.[0]?.children?.[0]?.value) {
+            return richText.children[0].children[0].value;
+          }
+        } catch (e) {
+          // If parsing fails, return as-is (might be plain text)
+          return descriptionField.value;
+        }
+      }
     }
     return null;
   } catch (error) {
