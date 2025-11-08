@@ -6,17 +6,12 @@ import ProductGrid from '@/components/products/ProductGrid';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import floatingMan from '@/assets/man_floating.png';
-import floatingMan2 from '@/assets/man_floating_2.png';
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<ShopifyProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [brightness, setBrightness] = useState<string>('dark');
   
-  const { scrollY } = useScroll();
-  const yParallax = useTransform(scrollY, [0, 500], [0, 150]);
-  const yParallax2 = useTransform(scrollY, [0, 500], [0, 200]);
 
 
   useEffect(() => {
@@ -39,34 +34,6 @@ export default function Home() {
       {/* Hero Section with Carousel Background */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden mt-8">
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
-        
-        {/* Floating Man - Left */}
-        <motion.div
-          style={{ y: yParallax }}
-          className="absolute left-8 md:left-16 bottom-16 md:bottom-24 z-10"
-        >
-          <img 
-            src={floatingMan} 
-            alt="Floating person" 
-            className="w-32 md:w-48 lg:w-56 object-contain pointer-events-none animate-float"
-          />
-        </motion.div>
-
-        {/* Floating Man - Upper Right */}
-        <motion.div
-          style={{ y: yParallax2 }}
-          className="absolute right-8 md:right-16 top-16 md:top-24 z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <img 
-            src={floatingMan2} 
-            alt="Floating person" 
-            className="w-24 md:w-40 lg:w-48 object-contain pointer-events-none animate-float"
-            style={{ animationDelay: '1.5s' }}
-          />
-        </motion.div>
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
