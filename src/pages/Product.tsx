@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cartStore';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { ArrowLeft, Check } from 'lucide-react';
+import ProductDeliveryInfo from '@/components/product/ProductDeliveryInfo';
 
 export default function Product() {
   const { handle } = useParams<{ handle: string }>();
@@ -209,6 +210,16 @@ export default function Product() {
             </div>
           </motion.div>
         </div>
+
+        {/* Delivery Info and Product Details */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16"
+        >
+          <ProductDeliveryInfo description={product.description} />
+        </motion.div>
       </div>
     </div>
   );

@@ -329,6 +329,89 @@ export async function getDiscountText() {
   }
 }
 
+export async function getMetaobject(type: string) {
+  const query = `
+    query GetMetaobject($type: String!, $first: Int!) {
+      metaobjects(type: $type, first: $first) {
+        edges {
+          node {
+            id
+            fields {
+              key
+              value
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await shopifyFetch<{
+    metaobjects: {
+      edges: Array<{
+        node: {
+          id: string;
+          fields: Array<{
+            key: string;
+            value: string;
+          }>;
+        };
+      }>;
+    };
+  }>(query, { type, first: 20 });
+
+  if (data.metaobjects.edges.length === 0) return null;
+
+  const fields = data.metaobjects.edges[0].node.fields;
+  const result: Record<string, string> = {};
+  fields.forEach(field => {
+    result[field.key] = field.value;
+  });
+
+  return result;
+}
+
+export async function getShippingDetails() {
+  const query = `
+    query GetShippingDetails($type: String!, $first: Int!) {
+      metaobjects(type: $type, first: $first) {
+        edges {
+          node {
+            id
+            fields {
+              key
+              value
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await shopifyFetch<{
+    metaobjects: {
+      edges: Array<{
+        node: {
+          id: string;
+          fields: Array<{
+            key: string;
+            value: string;
+          }>;
+        };
+      }>;
+    };
+  }>(query, { type: 'shipping_details', first: 20 });
+
+  return data.metaobjects.edges.map(edge => {
+    const fields = edge.node.fields;
+    const result: Record<string, string> = {};
+    fields.forEach(field => {
+      result[field.key] = field.value;
+    });
+    return result;
+  });
+}
+
 export async function createCheckout(lineItems: Array<{ variantId: string; quantity: number }>) {
   const query = `
     mutation CreateCheckout($input: CheckoutCreateInput!) {
