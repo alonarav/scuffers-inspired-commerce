@@ -86,6 +86,7 @@ export default function Product() {
       icon: <Check className="w-4 h-4" />,
       className: 'bg-green-500/50 border-green-500',
       position: 'bottom-center',
+      duration: 2000,
       action: {
         label: 'צפה בעגלה',
         onClick: openCart,

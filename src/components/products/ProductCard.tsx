@@ -34,6 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       icon: <Check className="w-4 h-4" />,
       className: 'bg-green-500/50 border-green-500',
       position: 'bottom-center',
+      duration: 2000,
     });
   };
 
@@ -64,10 +65,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           {variant?.availableForSale && (
             <button
               onClick={handleAddToCart}
-              className="absolute bottom-4 left-4 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110 z-10"
+              className="absolute bottom-4 left-4 w-10 h-10 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110 z-10 drop-shadow-lg"
+              style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
               aria-label="Add to cart"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="w-6 h-6" />
             </button>
           )}
         </div>
