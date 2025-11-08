@@ -8,9 +8,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-xl font-light tracking-wider mb-4">BOUTIQUE</h3>
+            <h3 className="text-xl font-light tracking-wider mb-4">CLARO</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Curated essentials for the modern lifestyle. Quality craftsmanship, timeless design.
+              Timeless Essentials, Everyday Comfort.
             </p>
           </div>
 
@@ -35,7 +35,7 @@ export default function Footer() {
             <h4 className="text-sm uppercase tracking-wider mb-4 font-medium">Follow Us</h4>
             <div className="flex space-x-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/claro_wear/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:bg-accent rounded-full transition-colors"
@@ -43,7 +43,7 @@ export default function Footer() {
               >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a
+              {/* <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -60,14 +60,14 @@ export default function Footer() {
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Boutique. All rights reserved.
+            © {new Date().getFullYear()} Claro. All rights reserved.
           </p>
         </div>
       </div>

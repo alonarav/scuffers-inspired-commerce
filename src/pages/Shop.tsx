@@ -35,7 +35,7 @@ export default function Shop() {
               Shop All
             </h1>
             <p className="text-muted-foreground">
-              Explore our complete collection
+              האוסף המלא של המוצרים שלנו
             </p>
           </div>
 

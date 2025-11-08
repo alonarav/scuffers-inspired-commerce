@@ -23,7 +23,7 @@ export default function Header() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/shop', label: 'Shop' },
-    { to: '/about', label: 'About' },
+    // { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
   ];
 
