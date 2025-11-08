@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { getProducts, ShopifyProduct } from '@/lib/shopify';
 import ProductGrid from '@/components/products/ProductGrid';
 import HeroCarousel from '@/components/home/HeroCarousel';
+import HorseAnimation from '@/components/home/HorseAnimation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
@@ -73,6 +74,9 @@ export default function Home() {
           </Button>
         </motion.div>
       </section>
+
+      {/* Horse Running Animation */}
+      <HorseAnimation />
 
       {/* Featured Products */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
