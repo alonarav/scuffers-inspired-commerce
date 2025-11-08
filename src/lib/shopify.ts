@@ -4,6 +4,7 @@ export interface ShopifyProduct {
   id: string;
   title: string;
   description: string;
+  descriptionHtml: string;
   handle: string;
   images: {
     edges: Array<{
@@ -92,6 +93,7 @@ export async function getProducts(first: number = 12) {
             id
             title
             description
+            descriptionHtml
             handle
             images(first: 2) {
               edges {
@@ -131,6 +133,7 @@ export async function getProductByHandle(handle: string) {
         id
         title
         description
+        descriptionHtml
         handle
         images(first: 5) {
           edges {
@@ -174,6 +177,7 @@ export async function getCollectionByHandle(handle: string) {
               id
               title
               description
+              descriptionHtml
               handle
               images(first: 2) {
                 edges {

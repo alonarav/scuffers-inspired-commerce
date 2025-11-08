@@ -159,10 +159,10 @@ export default function Product() {
               </p>
             </div>
 
-            {product.description && (
+            {product.descriptionHtml && (
               <div
-                className="text-muted-foreground leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                className="text-muted-foreground leading-relaxed prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
               />
             )}
 
@@ -214,7 +214,7 @@ export default function Product() {
             </div>
 
             {/* Delivery Info and Product Details */}
-            <ProductDeliveryInfo description={product.description} />
+            <ProductDeliveryInfo description={product.descriptionHtml} />
           </motion.div>
         </div>
       </div>
