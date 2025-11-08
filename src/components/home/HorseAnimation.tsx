@@ -34,17 +34,14 @@ export default function HorseAnimation() {
             willChange: 'transform'
           }}
         >
-          <div className="relative w-full max-w-md lg:max-w-lg">
+          <div className="relative w-full max-w-md lg:max-w-lg aspect-[4/3]">
             {horseFrames.map((frame, index) => (
               <motion.img
                 key={index}
                 src={frame}
                 alt={`Horse running frame ${index + 1}`}
-                className="w-full h-auto"
+                className="absolute inset-0 w-full h-full object-contain"
                 style={{
-                  position: index === 0 ? 'relative' : 'absolute',
-                  top: 0,
-                  left: 0,
                   display: useTransform(frameIndex, (current) => 
                     Math.floor(current) === index ? 'block' : 'none'
                   ),
