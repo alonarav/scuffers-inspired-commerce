@@ -32,10 +32,10 @@ export default function Contact() {
         >
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-light tracking-wider mb-6">
-              Get in Touch
+              צרו איתנו קשר
             </h1>
             <p className="text-xl text-muted-foreground">
-              We'd love to hear from you
+              נשמח לשמוע מכם
             </p>
           </div>
 

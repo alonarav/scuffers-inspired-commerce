@@ -7,6 +7,7 @@ import HeroCarousel from '@/components/home/HeroCarousel';
 import HorseAnimation from '@/components/home/HorseAnimation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import decorativeLine from '@/assets/decorative-line.png';
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<ShopifyProduct[]>([]);
@@ -81,6 +82,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
+      <img src={decorativeLine} alt="Decorative Line" className="mx-auto w-48 " style={{marginBottom: '-7rem'}} />
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <motion.div
           initial={{ opacity: 0 }}
@@ -115,6 +117,7 @@ export default function Home() {
             <Button asChild variant="outline" size="lg">
               <Link to="/shop">View All Products</Link>
             </Button>
+                <img src={decorativeLine} alt="Decorative Line" className="mx-auto w-48 " style={{marginBottom: '-7rem', rotate: '180deg'}} />
           </div>
         </motion.div>
       </section>

@@ -97,7 +97,7 @@ export default function Product() {
           className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Shop
+          בחזרה לחנות
         </Link>
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
