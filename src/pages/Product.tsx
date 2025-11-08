@@ -34,7 +34,7 @@ export default function Product() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen pt-24 pb-16">
+      <div className="min-h-screen pt-32 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="aspect-[3/4] bg-secondary/50 rounded animate-pulse" />
@@ -51,7 +51,7 @@ export default function Product() {
 
   if (!product) {
     return (
-      <div className="min-h-screen pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen pt-32 pb-16 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl mb-4">Product not found</h1>
           <Button asChild>
@@ -90,7 +90,7 @@ export default function Product() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           to="/shop"
