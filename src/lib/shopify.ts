@@ -418,6 +418,16 @@ export async function getShippingDetails() {
   });
 }
 
+export async function getLogoPlacement(): Promise<string> {
+  try {
+    const data = await getMetaobject('logo_placement');
+    return data?.placement || 'middle';
+  } catch (error) {
+    console.error('Error fetching logo placement:', error);
+    return 'middle';
+  }
+}
+
 export async function createCheckout(lineItems: Array<{ variantId: string; quantity: number }>) {
   const query = `
     mutation CreateCheckout($input: CheckoutCreateInput!) {
