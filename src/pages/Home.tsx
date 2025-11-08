@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { getProducts, ShopifyProduct } from '@/lib/shopify';
+import { getProducts, ShopifyProduct, getLogoPlacement } from '@/lib/shopify';
 import ProductGrid from '@/components/products/ProductGrid';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import HorseAnimation from '@/components/home/HorseAnimation';
@@ -13,6 +13,7 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<ShopifyProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [brightness, setBrightness] = useState<string>('dark');
+  const [logoPlacement, setLogoPlacement] = useState<string>('middle');
   
 
 
@@ -29,6 +30,7 @@ export default function Home() {
     };
 
     fetchProducts();
+    getLogoPlacement().then(setLogoPlacement);
   }, []);
 
   return (
@@ -48,30 +50,34 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4"
         >
-        <h1 
-          className={`text-4xl md:text-6xl lg:text-7xl font-optimus tracking-wider  transition-all duration-700 ${
-            brightness === 'bright' ? 'text-primary' : 'text-white'
-          }`}
-          style={{
-            textShadow: brightness === 'bright' 
-              ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
-              : '2px 2px 8px rgba(0, 0, 0, 0.8)',
-          }}
-        >
-          CLARO
-        </h1>
-          <p 
-            className={`text-2xl md:text-3xl font-script mb-5 max-w-2xl mx-auto transition-all duration-700 ${
-              brightness === 'bright' ? 'text-primary/80' : 'text-white/90'
-            }`}
-            style={{
-              textShadow: brightness === 'bright' 
-                ? '1px 1px 6px rgba(0, 0, 0, 0.2)' 
-                : '1px 1px 6px rgba(0, 0, 0, 0.7)'
-            }}
-          >
-            Refined by nature
-          </p>
+        {logoPlacement === 'middle' && (
+          <>
+            <h1 
+              className={`text-4xl md:text-6xl lg:text-7xl font-optimus tracking-wider  transition-all duration-700 ${
+                brightness === 'bright' ? 'text-primary' : 'text-white'
+              }`}
+              style={{
+                textShadow: brightness === 'bright' 
+                  ? '2px 2px 8px rgba(0, 0, 0, 0.3)' 
+                  : '2px 2px 8px rgba(0, 0, 0, 0.8)',
+              }}
+            >
+              CLARO
+            </h1>
+            <p 
+              className={`text-2xl md:text-3xl font-script mb-5 max-w-2xl mx-auto transition-all duration-700 ${
+                brightness === 'bright' ? 'text-primary/80' : 'text-white/90'
+              }`}
+              style={{
+                textShadow: brightness === 'bright' 
+                  ? '1px 1px 6px rgba(0, 0, 0, 0.2)' 
+                  : '1px 1px 6px rgba(0, 0, 0, 0.7)'
+              }}
+            >
+              Refined by nature
+            </p>
+          </>
+        )}
           <Button asChild size="lg" className="group">
             <Link to="/shop">
               Shop Now

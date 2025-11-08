@@ -40,7 +40,7 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 md:h-16">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Mobile menu button - Left on mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -53,13 +53,13 @@ export default function Header() {
           {/* Logo - Center on mobile, left on desktop */}
           {logoPlacement === 'up' ? (
             <div className="flex items-center gap-3 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
-              <Link to="/" className="hover:opacity-70 transition-opacity">
+              <Link to="/" className="hover:opacity-70 transition-opacity flex items-center">
                 <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
               </Link>
-              <span className="text-2xl md:text-3xl font-optimus tracking-wider">CLARO</span>
+              <span className="text-2xl md:text-3xl font-optimus tracking-wider flex items-center">CLARO</span>
             </div>
           ) : (
-            <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+            <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center">
               <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
             </Link>
           )}

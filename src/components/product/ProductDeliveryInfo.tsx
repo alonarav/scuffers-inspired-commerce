@@ -111,13 +111,13 @@ export default function ProductDeliveryInfo({ description }: ProductDeliveryInfo
 
       {/* Shipping Details */}
       {shippingDetails.length > 0 && (
-        <div className="rounded-lg p-6 space-y-3" style={{ backgroundColor: '#F4E3C1' }} dir="rtl">
+        <div className="bg-secondary/30 rounded-lg p-6 space-y-3" dir="rtl">
           {shippingDetails.map((detail, index) => {
             const IconComponent = getIconComponent(detail.icon);
             return (
-              <div key={index} className="flex items-start justify-end gap-3">
-                <p className="text-sm text-right">{detail.description}</p>
-                <IconComponent className="w-5 h-5 text-foreground shrink-0 mt-0.5" />
+              <div key={index} className="flex items-center gap-3">
+                <IconComponent className="w-5 h-5 text-foreground shrink-0" />
+                <p className="text-sm">{detail.description}</p>
               </div>
             );
           })}
