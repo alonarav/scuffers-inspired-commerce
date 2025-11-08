@@ -74,7 +74,7 @@ export default function Home() {
                   : '1px 1px 6px rgba(0, 0, 0, 0.7)'
               }}
             >
-              Refined by nature
+              {/* Refined by nature */}
             </p>
           </>
         )}
