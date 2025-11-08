@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getDiscountTexts } from '@/lib/shopify';
+import Marquee from 'react-fast-marquee';
 import claroLogo from '@/assets/claro-logo.svg';
 
 export default function AnnouncementBar() {
@@ -20,9 +21,9 @@ export default function AnnouncementBar() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground py-2 overflow-hidden">
-      <div className="flex animate-marquee whitespace-nowrap" style={{ direction: 'rtl' }}>
+      <Marquee speed={50} gradient={false}>
         {repeatedTexts.map((text, i) => (
-          <span key={i} className="ml-8 text-sm font-medium">
+          <span key={i} className="mx-8 text-sm font-medium">
             {text}
             <img
               src={claroLogo}
@@ -32,7 +33,7 @@ export default function AnnouncementBar() {
             />
           </span>
         ))}
-      </div>
+      </Marquee>
     </div>
   );
 }
