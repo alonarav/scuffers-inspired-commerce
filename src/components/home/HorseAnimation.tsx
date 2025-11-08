@@ -20,8 +20,10 @@ export default function HorseAnimation() {
     offset: ["start end", "end start"]
   });
 
-  // Map scroll progress to frame index (0-8)
-  const frameIndex = useTransform(scrollYProgress, [0, 1], [0, 8]);
+  // Map scroll progress to frame index (0-8) with faster cycling
+  const frameIndex = useTransform(scrollYProgress, 
+    (progress) => Math.floor(progress * 36) % 9
+  );
 
   return (
     <section ref={containerRef} className="relative py-24 overflow-hidden">
@@ -32,7 +34,7 @@ export default function HorseAnimation() {
             willChange: 'transform'
           }}
         >
-          <motion.div className="relative w-full max-w-md lg:max-w-lg">
+          <div className="relative w-full max-w-md lg:max-w-lg">
             {horseFrames.map((frame, index) => (
               <motion.img
                 key={index}
@@ -43,15 +45,13 @@ export default function HorseAnimation() {
                   position: index === 0 ? 'relative' : 'absolute',
                   top: 0,
                   left: 0,
-                  opacity: useTransform(
-                    frameIndex,
-                    [index - 0.5, index, index + 0.5],
-                    [0, 1, 0]
+                  display: useTransform(frameIndex, (current) => 
+                    Math.floor(current) === index ? 'block' : 'none'
                   ),
                 }}
               />
             ))}
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
