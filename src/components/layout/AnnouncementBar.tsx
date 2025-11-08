@@ -15,10 +15,11 @@ export default function AnnouncementBar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground py-2 overflow-hidden">
       <div className="flex animate-marquee whitespace-nowrap">
-        <span className="mx-4 text-sm font-medium">{discountText}</span>
-        <span className="mx-4 text-sm font-medium">{discountText}</span>
-        <span className="mx-4 text-sm font-medium">{discountText}</span>
-        <span className="mx-4 text-sm font-medium">{discountText}</span>
+        {[...Array(8)].map((_, i) => (
+          <span key={i} className="mx-8 text-sm font-medium">
+            {discountText}
+          </span>
+        ))}
       </div>
     </div>
   );
