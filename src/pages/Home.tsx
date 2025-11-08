@@ -36,6 +36,11 @@ export default function Home() {
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden mt-8">
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
         
+        {/* Horse Animation - Bottom Left */}
+        <div className="absolute bottom-8 left-8 z-10 w-48 md:w-64 lg:w-80">
+          <HorseAnimation />
+        </div>
+        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,9 +79,6 @@ export default function Home() {
           </Button>
         </motion.div>
       </section>
-
-      {/* Horse Running Animation */}
-      <HorseAnimation />
 
       {/* Featured Products */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">

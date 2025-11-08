@@ -40,7 +40,7 @@ export default function HorseAnimation() {
                 key={index}
                 src={frame}
                 alt={`Horse running frame ${index + 1}`}
-                className="absolute inset-0 w-full h-full object-contain"
+                className="absolute inset-0 w-full h-full object-contain brightness-0 invert"
                 style={{
                   display: useTransform(frameIndex, (current) => 
                     Math.floor(current) === index ? 'block' : 'none'
