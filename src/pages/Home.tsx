@@ -38,7 +38,7 @@ export default function Home() {
         
         {/* Horse Animation - Bottom Left */}
         <div className="absolute bottom-8 left-8 z-10 w-48 md:w-64 lg:w-80">
-          <HorseAnimation />
+          <HorseAnimation brightness={brightness} />
         </div>
         
         <motion.div

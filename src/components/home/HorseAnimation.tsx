@@ -12,7 +12,11 @@ import horse9 from '@/assets/horse/9.svg';
 
 const horseFrames = [horse1, horse2, horse3, horse4, horse5, horse6, horse7, horse8, horse9];
 
-export default function HorseAnimation() {
+interface HorseAnimationProps {
+  brightness?: string;
+}
+
+export default function HorseAnimation({ brightness = 'dark' }: HorseAnimationProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -40,7 +44,9 @@ export default function HorseAnimation() {
                 key={index}
                 src={frame}
                 alt={`Horse running frame ${index + 1}`}
-                className="absolute inset-0 w-full h-full object-contain brightness-0 invert"
+                className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ${
+                  brightness === 'bright' ? '[filter:brightness(0)_saturate(100%)_invert(27%)_sepia(51%)_saturate(2878%)_hue-rotate(346deg)_brightness(104%)_contrast(97%)]' : 'brightness-0 invert'
+                }`}
                 style={{
                   display: useTransform(frameIndex, (current) => 
                     Math.floor(current) === index ? 'block' : 'none'
