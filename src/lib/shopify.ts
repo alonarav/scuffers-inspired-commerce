@@ -274,6 +274,49 @@ export async function getPromoImages(placement: string = 'hero-banner') {
   return promoImages;
 }
 
+export async function getDiscountText() {
+  const query = `
+    query GetDiscount($type: String!, $first: Int!) {
+      metaobjects(type: $type, first: $first) {
+        edges {
+          node {
+            id
+            fields {
+              key
+              value
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await shopifyFetch<{
+      metaobjects: {
+        edges: Array<{
+          node: {
+            id: string;
+            fields: Array<{
+              key: string;
+              value: string;
+            }>;
+          };
+        }>;
+      };
+    }>(query, { type: 'discount', first: 1 });
+
+    if (data.metaobjects.edges.length > 0) {
+      const descriptionField = data.metaobjects.edges[0].node.fields.find(f => f.key === 'description');
+      return descriptionField?.value || null;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching discount:', error);
+    return null;
+  }
+}
+
 export async function createCheckout(lineItems: Array<{ variantId: string; quantity: number }>) {
   const query = `
     mutation CreateCheckout($input: CheckoutCreateInput!) {
