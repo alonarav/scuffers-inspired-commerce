@@ -65,12 +65,12 @@ export default function Header() {
           )}
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8 h-full">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-sm uppercase tracking-wider hover:text-muted-foreground transition-colors"
+                className="text-sm uppercase tracking-wider hover:text-muted-foreground transition-colors flex items-center h-full"
               >
                 {link.label}
               </Link>
