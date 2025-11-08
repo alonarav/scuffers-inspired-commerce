@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getDiscountTexts } from '@/lib/shopify';
+import claroLogo from '@/assets/claro-logo.svg';
 
 export default function AnnouncementBar() {
-  const [discountTexts, setDiscountTexts] = useState<string[]>(['20% הנחה בקנייה מעל מאה שקל WELCOME20']);
+  const [discountTexts, setDiscountTexts] = useState<string[]>([
+    '20% הנחה בקנייה מעל מאה שקל WELCOME20'
+  ]);
 
   useEffect(() => {
     getDiscountTexts().then(texts => {
@@ -12,15 +15,21 @@ export default function AnnouncementBar() {
     });
   }, []);
 
-  // Create a seamless loop by duplicating the content
-  const allTexts = [...discountTexts, ...discountTexts];
+  // Repeat the texts 100 times to create an endless loop
+  const repeatedTexts = Array(500).fill(discountTexts).flat();
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground py-2 overflow-hidden">
-      <div className="flex animate-marquee whitespace-nowrap">
-        {allTexts.map((text, i) => (
-          <span key={i} className="mx-8 text-sm font-medium">
+      <div className="flex animate-marquee whitespace-nowrap" style={{ direction: 'rtl' }}>
+        {repeatedTexts.map((text, i) => (
+          <span key={i} className="ml-8 text-sm font-medium">
             {text}
+            <img
+              src={claroLogo}
+              style={{ color: 'white' }}
+              alt="Claro Logo"
+              className="w-5 h-5 mx-4 inline-block filter invert brightness-0"
+            />
           </span>
         ))}
       </div>
