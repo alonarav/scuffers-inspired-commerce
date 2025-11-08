@@ -4,10 +4,12 @@ import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import claroLogo from '../../assets/claro-logo2.svg';
+import { getLogoPlacement } from '@/lib/shopify';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [logoPlacement, setLogoPlacement] = useState<string>('middle');
   const { openCart, getItemCount } = useCartStore();
   const itemCount = getItemCount();
 
@@ -18,6 +20,10 @@ export default function Header() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    getLogoPlacement().then(setLogoPlacement);
   }, []);
 
   const navLinks = [
@@ -45,9 +51,18 @@ export default function Header() {
           </button>
 
           {/* Logo - Center on mobile, left on desktop */}
-          <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
-            <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
-          </Link>
+          {logoPlacement === 'up' ? (
+            <div className="flex items-center gap-3 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+              <Link to="/" className="hover:opacity-70 transition-opacity">
+                <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
+              </Link>
+              <span className="text-2xl md:text-3xl font-optimus tracking-wider">CLARO</span>
+            </div>
+          ) : (
+            <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+              <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
+            </Link>
+          )}
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
