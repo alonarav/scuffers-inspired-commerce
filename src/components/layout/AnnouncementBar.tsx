@@ -23,7 +23,7 @@ export default function AnnouncementBar() {
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground py-2 overflow-hidden">
       <Marquee speed={50} gradient={false}>
         {repeatedTexts.map((text, i) => (
-          <span key={i} className="mx-8 text-sm font-medium">
+          <span key={i} className=" text-sm font-medium"  style={{ direction: 'rtl' }}>
             {text}
             <img
               src={claroLogo}
