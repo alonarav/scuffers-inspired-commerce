@@ -9,7 +9,7 @@ interface ProductDeliveryInfoProps {
 }
 
 export default function ProductDeliveryInfo({ description }: ProductDeliveryInfoProps) {
-  const [deliveryTime, setDeliveryTime] = useState<string>('7-14');
+  const [deliveryTime, setDeliveryTime] = useState<string>('7');
   const [shippingDetails, setShippingDetails] = useState<Array<Record<string, string>>>([]);
   const [currentStep, setCurrentStep] = useState(0);
 

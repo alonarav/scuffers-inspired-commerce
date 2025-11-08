@@ -196,10 +196,10 @@ export default function Product() {
                 {selectedVariant?.availableForSale ? (
                   <>
                     <Check className="w-4 h-4 mr-2" />
-                    Add to Cart
+                    הוסף לעגלה
                   </>
                 ) : (
-                  'Sold Out'
+                  'סולד אאוט'
                 )}
               </Button>
 
