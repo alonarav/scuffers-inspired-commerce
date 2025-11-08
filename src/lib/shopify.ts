@@ -412,7 +412,29 @@ export async function getShippingDetails() {
     const fields = edge.node.fields;
     const result: Record<string, string> = {};
     fields.forEach(field => {
-      result[field.key] = field.value;
+      if (field.key === 'description') {
+        // Parse rich text JSON if it exists
+        try {
+          const parsed = JSON.parse(field.value);
+          if (parsed.type === 'root' && parsed.children) {
+            // Extract text from rich text structure
+            const extractText = (node: any): string => {
+              if (node.type === 'text') return node.value || '';
+              if (node.children) {
+                return node.children.map(extractText).join('');
+              }
+              return '';
+            };
+            result[field.key] = extractText(parsed);
+          } else {
+            result[field.key] = field.value;
+          }
+        } catch {
+          result[field.key] = field.value;
+        }
+      } else {
+        result[field.key] = field.value;
+      }
     });
     return result;
   });
