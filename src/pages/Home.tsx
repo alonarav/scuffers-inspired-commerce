@@ -38,7 +38,7 @@ export default function Home() {
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
         
         {/* Horse Animation - Bottom Left */}
-        <div className="absolute bottom-8 left-8 z-10 w-48 md:w-64 lg:w-80">
+        <div className="absolute bottom-0 left-4 sm:left-8 z-10 w-32 sm:w-40 md:w-48 lg:w-56">
           <HorseAnimation brightness={brightness} />
         </div>
         

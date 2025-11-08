@@ -30,33 +30,22 @@ export default function HorseAnimation({ brightness = 'dark' }: HorseAnimationPr
   );
 
   return (
-    <section ref={containerRef} className="relative py-24 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          className="flex items-center justify-center"
+    <div ref={containerRef} className="relative w-full aspect-[4/3]">
+      {horseFrames.map((frame, index) => (
+        <motion.img
+          key={index}
+          src={frame}
+          alt={`Horse running frame ${index + 1}`}
+          className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ${
+            brightness === 'bright' ? '[filter:brightness(0)_saturate(100%)_invert(27%)_sepia(51%)_saturate(2878%)_hue-rotate(346deg)_brightness(104%)_contrast(97%)]' : 'brightness-0 invert'
+          }`}
           style={{
-            willChange: 'transform'
+            display: useTransform(frameIndex, (current) => 
+              Math.floor(current) === index ? 'block' : 'none'
+            ),
           }}
-        >
-          <div className="relative w-full max-w-md lg:max-w-lg aspect-[4/3]">
-            {horseFrames.map((frame, index) => (
-              <motion.img
-                key={index}
-                src={frame}
-                alt={`Horse running frame ${index + 1}`}
-                className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ${
-                  brightness === 'bright' ? '[filter:brightness(0)_saturate(100%)_invert(27%)_sepia(51%)_saturate(2878%)_hue-rotate(346deg)_brightness(104%)_contrast(97%)]' : 'brightness-0 invert'
-                }`}
-                style={{
-                  display: useTransform(frameIndex, (current) => 
-                    Math.floor(current) === index ? 'block' : 'none'
-                  ),
-                }}
-              />
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
+        />
+      ))}
+    </div>
   );
 }
