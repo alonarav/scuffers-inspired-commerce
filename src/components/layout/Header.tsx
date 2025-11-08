@@ -35,8 +35,17 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 md:h-16">
-          {/* Logo */}
-          <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity">
+          {/* Mobile menu button - Left on mobile */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 hover:bg-accent rounded-full transition-colors order-first"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+
+          {/* Logo - Center on mobile, left on desktop */}
+          <Link to="/" className="text-xl md:text-2xl font-light tracking-wider hover:opacity-70 transition-opacity absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
             <img src={claroLogo} alt="claro logo" className="h-8 md:h-10" />
           </Link>
 
@@ -53,30 +62,19 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Cart & Mobile Menu */}
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={openCart}
-              className="relative p-2 hover:bg-accent rounded-full transition-colors"
-              aria-label="Shopping cart"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
-                  {itemCount}
-                </span>
-              )}
-            </button>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-accent rounded-full transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
+          {/* Cart - Right on both mobile and desktop */}
+          <button
+            onClick={openCart}
+            className="relative p-2 hover:bg-accent rounded-full transition-colors"
+            aria-label="Shopping cart"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
+                {itemCount}
+              </span>
+            )}
+          </button>
         </div>
       </div>
 
