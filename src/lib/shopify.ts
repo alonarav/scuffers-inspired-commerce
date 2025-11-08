@@ -278,7 +278,7 @@ export async function getPromoImages(placement: string = 'hero-banner') {
   return promoImages;
 }
 
-export async function getDiscountText() {
+export async function getDiscountTexts() {
   const query = `
     query GetDiscount($type: String!, $first: Int!) {
       metaobjects(type: $type, first: $first) {
@@ -308,10 +308,10 @@ export async function getDiscountText() {
           };
         }>;
       };
-    }>(query, { type: 'discount', first: 1 });
+    }>(query, { type: 'discount', first: 20 });
 
-    if (data.metaobjects.edges.length > 0) {
-      const descriptionField = data.metaobjects.edges[0].node.fields.find(f => f.key === 'description');
+    const discounts = data.metaobjects.edges.map(edge => {
+      const descriptionField = edge.node.fields.find(f => f.key === 'description');
       if (descriptionField?.value) {
         try {
           // Parse the rich text JSON structure
@@ -325,11 +325,13 @@ export async function getDiscountText() {
           return descriptionField.value;
         }
       }
-    }
-    return null;
+      return null;
+    }).filter(Boolean) as string[];
+
+    return discounts.length > 0 ? discounts : ['20% הנחה בקנייה מעל מאה שקל WELCOME20'];
   } catch (error) {
-    console.error('Error fetching discount:', error);
-    return null;
+    console.error('Error fetching discounts:', error);
+    return ['20% הנחה בקנייה מעל מאה שקל WELCOME20'];
   }
 }
 

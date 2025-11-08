@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
-import { getDiscountText } from '@/lib/shopify';
+import { getDiscountTexts } from '@/lib/shopify';
 
 export default function AnnouncementBar() {
-  const [discountText, setDiscountText] = useState<string>('20% הנחה בקנייה מעל מאה שקל WELCOME20');
+  const [discountTexts, setDiscountTexts] = useState<string[]>(['20% הנחה בקנייה מעל מאה שקל WELCOME20']);
 
   useEffect(() => {
-    getDiscountText().then(text => {
-      if (text) {
-        setDiscountText(text);
+    getDiscountTexts().then(texts => {
+      if (texts && texts.length > 0) {
+        setDiscountTexts(texts);
       }
     });
   }, []);
 
+  // Create a seamless loop by duplicating the content
+  const allTexts = [...discountTexts, ...discountTexts];
+
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground py-2 overflow-hidden">
       <div className="flex animate-marquee whitespace-nowrap">
-        {[...Array(8)].map((_, i) => (
+        {allTexts.map((text, i) => (
           <span key={i} className="mx-8 text-sm font-medium">
-            {discountText}
+            {text}
           </span>
         ))}
       </div>
