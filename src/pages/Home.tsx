@@ -88,14 +88,14 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-center mb-16">
+          {/* <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-4">
               Featured Products
             </h2>
             <p className="text-muted-foreground">
               Handpicked favorites from our latest collection
             </p>
-          </div>
+          </div> */}
 
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
