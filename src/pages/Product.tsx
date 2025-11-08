@@ -82,9 +82,12 @@ export default function Product() {
       handle: product.handle,
     });
 
-    toast.success('Added to cart', {
+    toast.success('המוצר נוסף לעגלה', {
+      icon: <Check className="w-4 h-4" />,
+      className: 'bg-green-500/50 border-green-500',
+      position: 'bottom-center',
       action: {
-        label: 'View Cart',
+        label: 'צפה בעגלה',
         onClick: openCart,
       },
     });

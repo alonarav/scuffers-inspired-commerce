@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShopifyProduct } from '@/lib/shopify';
+import { useCartStore } from '@/store/cartStore';
+import { Plus, Check } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -10,6 +13,29 @@ export default function ProductCard({ product }: ProductCardProps) {
   const mainImage = product.images.edges[0]?.node;
   const variant = product.variants.edges[0]?.node;
   const price = variant ? parseFloat(variant.price.amount) : 0;
+  const { addItem } = useCartStore();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!variant) return;
+
+    addItem({
+      variantId: variant.id,
+      productId: product.id,
+      title: product.title,
+      variantTitle: variant.title,
+      price: variant.price.amount,
+      currencyCode: variant.price.currencyCode,
+      image: mainImage?.url || '',
+      handle: product.handle,
+    });
+
+    toast.success('המוצר נוסף לעגלה', {
+      icon: <Check className="w-4 h-4" />,
+      className: 'bg-green-500/50 border-green-500',
+      position: 'bottom-center',
+    });
+  };
 
   return (
     <motion.div
@@ -34,6 +60,15 @@ export default function ProductCard({ product }: ProductCardProps) {
                 Sold Out
               </span>
             </div>
+          )}
+          {variant?.availableForSale && (
+            <button
+              onClick={handleAddToCart}
+              className="absolute bottom-4 left-4 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110 z-10"
+              aria-label="Add to cart"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
           )}
         </div>
 
