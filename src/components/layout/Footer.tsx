@@ -21,9 +21,9 @@ export default function Footer() {
               <Link to="/shop" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Shop All
               </Link>
-              <Link to="/about" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {/* <Link to="/about" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                 About Us
-              </Link>
+              </Link> */}
               <Link to="/contact" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Contact
               </Link>
