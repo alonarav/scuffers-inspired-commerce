@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Carousel Background */}
-      <section className="relative h-[75vh] md:h-[88vh] lg:h-[93vh] flex items-center justify-center overflow-hidden mt-8">
+      <section className="relative h-[80vh] md:h-[88vh] lg:h-[93vh] flex items-center justify-center overflow-hidden mt-8">
         <HeroCarousel placement="hero-banner" onBrightnessChange={setBrightness} />
         
         {/* Horse Animation - Bottom Left */}
