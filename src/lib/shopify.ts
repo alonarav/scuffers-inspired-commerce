@@ -6,6 +6,7 @@ export interface ShopifyProduct {
   description: string;
   descriptionHtml: string;
   handle: string;
+  productType: string;
   images: {
     edges: Array<{
       node: {
@@ -24,6 +25,15 @@ export interface ShopifyProduct {
           currencyCode: string;
         };
         availableForSale: boolean;
+      };
+    }>;
+  };
+  metafields?: {
+    edges: Array<{
+      node: {
+        key: string;
+        value: string;
+        namespace: string;
       };
     }>;
   };
@@ -95,6 +105,7 @@ export async function getProducts(first: number = 12) {
             description
             descriptionHtml
             handle
+            productType
             images(first: 2) {
               edges {
                 node {
@@ -113,6 +124,15 @@ export async function getProducts(first: number = 12) {
                     currencyCode
                   }
                   availableForSale
+                }
+              }
+            }
+            metafields(identifiers: [{namespace: "custom", key: "color"}]) {
+              edges {
+                node {
+                  key
+                  value
+                  namespace
                 }
               }
             }
@@ -135,6 +155,7 @@ export async function getProductByHandle(handle: string) {
         description
         descriptionHtml
         handle
+        productType
         images(first: 5) {
           edges {
             node {
@@ -153,6 +174,15 @@ export async function getProductByHandle(handle: string) {
                 currencyCode
               }
               availableForSale
+            }
+          }
+        }
+        metafields(identifiers: [{namespace: "custom", key: "color"}]) {
+          edges {
+            node {
+              key
+              value
+              namespace
             }
           }
         }
