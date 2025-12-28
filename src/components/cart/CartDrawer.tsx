@@ -136,13 +136,13 @@ export default function CartDrawer() {
             {items.length > 0 && (
               <div className="border-t border-border p-6 space-y-4">
                 <div className="flex justify-between text-sm">
-                  <span className="uppercase tracking-wider">Subtotal</span>
                   <span className="font-medium">
-                    ${subtotal.toFixed(2)} {items[0]?.currencyCode}
+                    {subtotal.toFixed(2)} {items[0]?.currencyCode}
                   </span>
+                  <span className="uppercase tracking-wider">סה"כ</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Shipping and taxes calculated at checkout.
+                  עלות משלוח וחיובים נוספים יחושבו בצקאאוט
                 </p>
                 <Button
                   onClick={handleCheckout}
@@ -150,7 +150,7 @@ export default function CartDrawer() {
                   className="w-full"
                   size="lg"
                 >
-                  {isCheckingOut ? 'Processing...' : 'Checkout'}
+                  {isCheckingOut ? 'מעבד...' : 'לרכישה'}
                 </Button>
               </div>
             )}
